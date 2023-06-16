@@ -1,0 +1,19 @@
+.add-pharmacy-btn {
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: -40px;
+  background-color: darkgreen;
+}
+
+.add-pharmacy-btn:focus {
+  outline: none;
+  background-color: darkgreen;
+}
+
+.add-pharmacy-btn:hover {
+  background-color: darkgreen;
+}
