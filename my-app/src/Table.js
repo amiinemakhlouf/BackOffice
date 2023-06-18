@@ -4,6 +4,7 @@ import "./Table.css";
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const Table = ( refrechtable) => {
   const [pharmacies, setPharmacies] = useState([]);
@@ -15,7 +16,7 @@ export const Table = ( refrechtable) => {
 
   const fetchPharmacies = async () => {
     try {
-      const response = await axios.get('http://192.168.1.11:3010/api/pharmacy');
+      const response = await axios.get('http://192.168.203.34:3010/api/pharmacy');
       setPharmacies(response.data);
     } catch (error) {
       console.log(error);
@@ -28,11 +29,11 @@ export const Table = ( refrechtable) => {
         <thead>
           <tr>
             <th>Nom de la pharmacie</th>
-            
             <th>Rue</th>
             <th>Heure d'ouverture</th>
             <th>Heure de fermeture</th>
             <th>Numéro de téléphone</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +44,11 @@ export const Table = ( refrechtable) => {
               <td>{pharmacy.workingHourStart}</td>
               <td>{pharmacy.workingHourEnd}</td>
               <td>{pharmacy.phoneNumber}</td>
+              <td>
+                <button className="delete-button">
+                  <DeleteIcon className="delete-icon" />
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

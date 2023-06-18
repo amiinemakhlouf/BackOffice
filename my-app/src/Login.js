@@ -24,7 +24,7 @@ const Login = ({ onRouteChange }) => {
     }
 
     try {
-      const response = await axios.post('http://192.168.1.11:3010/api/admin/login', { email, password });
+      const response = await axios.post('http://192.168.203.34:3010/api/admin/login', { email, password });
       console.log("my email is " + email);
 
       const data = response.data; 
@@ -66,58 +66,72 @@ const Login = ({ onRouteChange }) => {
         backgroundSize: 'cover',
       }}
     >
-      <h1 style={{ marginBottom: '100px', color: 'green' }}>Bienvenue à ma pharmacie</h1>
-      <form
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', width: '300px' }}
-        onSubmit={handleLogin}
+      <div
+        style={{
+          backgroundColor: '#ffffff',
+          padding: '20px',
+          borderRadius: '10px',
+          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+          maxWidth: '400px',
+          width: '100%',
+        }}
       >
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ padding: '10px', width: '100%', borderRadius: '5px', border: '1px solid #ccc' }}
-          placeholder="Email"
-          required
-        />
-        <div style={{ position: 'relative', width: '100%' }}>
+        <h1 style={{ marginBottom: '30px', color: 'green', textAlign: 'center' }}>Bienvenue à ma pharmacie</h1>
+        <form
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}
+          onSubmit={handleLogin}
+        >
           <input
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ padding: '10px', width: '100%', borderRadius: '5px', border: '1px solid #ccc', }}
-            placeholder="Password"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{ padding: '10px', width: '100%', borderRadius: '5px', border: '1px solid #ccc' }}
+            placeholder="Email"
             required
           />
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              right: '10px',
-              transform: 'translateY(-50%)',
-              cursor: 'pointer',
-            }}
-            onClick={handleTogglePassword}
-          >
-            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+          <div style={{ position: 'relative', width: '100%' }}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{ padding: '10px', width: '100%', borderRadius: '5px', border: '1px solid #ccc', }}
+              placeholder="Password"
+              required
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: '50%',
+                right: '10px',
+                transform: 'translateY(-50%)',
+                cursor: 'pointer',
+              }}
+              onClick={handleTogglePassword}
+            >
+              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </div>
           </div>
-        </div>
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-        <button
-          type="submit"
-          style={{
-            padding: '10px 20px',
-            background: '#097969',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
-        >
-          Se connecter
-        </button>
-      </form>
+          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+          <button
+            type="submit"
+            style={{
+              padding: '10px 20px',
+              background: 'linear-gradient(to right, #006064, #00838f)',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+            }}
+          >
+            Se connecter
+          </button>
+        </form>
+      </div>
     </div>
   );
+  
+  
 };
 
 export default Login;

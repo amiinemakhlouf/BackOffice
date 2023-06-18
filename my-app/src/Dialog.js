@@ -83,7 +83,7 @@ const DialogForm = ({ open, onClose,onSubmitSuccess  }) => {
     };
 
     try {
-      await axios.post('http://192.168.1.11:3010/api/pharmacy/save', formData);
+      await axios.post('http://192.168.203.34:3010/api/pharmacy/save', formData);
       onSubmitSuccess(); 
       handleClose();
     } catch (error) {

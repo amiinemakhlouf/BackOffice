@@ -84,41 +84,22 @@ const Sidebar = ({ onRouteChange }) => {
                   <i className="bi bi-grid"></i> admins
                 </button>
               </li>
+              <li>
+  <button
+    className="nav-link btn btn-link text-white dropdown-item"
+    onClick={() => {
+      setTimeout(() => {
+        onRouteChange('login');
+      }, );
+    }}
+  >
+    Se déconnecter
+  </button>
+</li>
+
             </ul>
-            <div>
-              <button
-                type="button"
-                id="dropdownMenuButton"
-                aria-expanded="false"
-                onClick={() => {
-                  setTimeout(() => {
-                    onRouteChange('login');
-                  }, 1500);
-                }}
-                style={{
-                  backgroundColor: 'white',
-                  color: 'darkgreen',
-                  borderRadius: '15px',
-                  padding: '10px',
-                  marginLeft: '30px',
-                  marginTop: '35px'
-                }}
-              >
-                <i className="bi bi-box-arrow-right"></i> Se déconnecter
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Nouvel admin
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Se déconnecter
-                  </a>
-                </li>
-              </ul>
-            </div>
+
+
           </div>
         </div>
         <div className="col py-3">{renderComponent()}</div>
