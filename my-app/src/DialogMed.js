@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   Button,
   Dialog,
@@ -32,44 +33,63 @@ const useStyles = makeStyles({
 });
 
 
-const DialogMed = ({ open, onClose, onSubmit }) => {
-  const [nom, setNom] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const DialogMed = ({ open, onClose, onSubmitSuccess }) => {
+  const [name, setName] = useState('');
+  const [inStock, setInStock] = useState('');
+  const [description, setDescription] = useState('');
+  const [codabar, setCodAbar] = useState('');
+  const[email,setEmail]=useState('amine@gmail.com');
+  
  
 
   const classes = useStyles();
 
-  const handleNomChange = (event) => {
-    setNom(event.target.value);
+  const handleNameChange = (event) => {
+    setName(event.target.value);
   };
-  const handleEmailChange = (event) => {
+  const handleInStockChange = (event) => {
+    setInStock(event.target.value);
+  };
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+  const handleCodeAbarChange = (event) => {
+    setCodAbar(event.target.value);
+  };
+  const handleEmailhange = (event) => {
     setEmail(event.target.value);
   };
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+
 
   
 
   
   
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     const formData = {
-      nom,
-      email,
-    password,
+      name,
+      inStock,
+    description,
+    codabar,
+    email
     };
-    onSubmit(formData);
-    handleClose();
+    try {
+      await axios.post('http://192.168.100.175:3010/pharmacy/medication', formData);
+      onSubmitSuccess(); 
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleClose = () => {
     onClose();
-    setNom('');
+    setName('');
+   setInStock('');
+   setDescription('');
+   setCodAbar('');
    setEmail('');
-   setPassword('');
     
   };
 
@@ -81,31 +101,41 @@ const DialogMed = ({ open, onClose, onSubmit }) => {
       <TextField
           autoFocus
           margin="dense"
-          label="Nom de la pharmacie"
+          label="Nom"
           type="text"
           fullWidth
-          value={nom}
-          onChange={handleNomChange}
+          value={name}
+          onChange={handleNameChange}
         />
         
         <TextField
           autoFocus
           margin="dense"
-          label="nom"
-          type="text"
+          label="En Stock"
+          type="boolean"
           fullWidth
-          value={email}
-          onChange={handleEmailChange}
+          value={inStock}
+          onChange={handleInStockChange}
           required
         />
       <TextField
           autoFocus
           margin="dense"
-          label="quantité"
-          type="number"
+          label="Description"
+          type="text"
           fullWidth
-          value={email}
-          onChange={handleEmailChange}
+          value={description}
+          onChange={handleDescriptionChange}
+          required
+        />
+         <TextField
+          autoFocus
+          margin="dense"
+          label="Code"
+          type="text"
+          fullWidth
+          value={codabar}
+          onChange={handleCodeAbarChange}
           required
         />
        

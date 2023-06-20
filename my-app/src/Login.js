@@ -24,7 +24,7 @@ const Login = ({ onRouteChange }) => {
     }
 
     try {
-      const response = await axios.post('http://192.168.203.34:3010/api/admin/login', { email, password });
+      const response = await axios.post('http://192.168.100.175:3010/api/admin/login', { email, password });
       console.log("my email is " + email);
 
       const data = response.data; 

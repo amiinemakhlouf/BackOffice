@@ -31,9 +31,9 @@ export const TableMed= () => {
       <table className="table" style={{marginLeft:"100px" ,marginTop:"30px"}}>
         <thead>
           <tr>
-          <th>nom de la pharmacie</th>
             <th>nom</th>
-           <th>quantité</th>
+           <th>en stock</th>
+           <th>description</th>
           </tr>
         </thead>
         <tbody>

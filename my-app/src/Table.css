@@ -82,3 +82,15 @@
     color: red;
     font-size: 1.6rem;
   }
+  .edit-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 5px;
+  }
+  
+  .edit-icon {
+    color: #337ab7;
+    font-size: 18px;
+  }
