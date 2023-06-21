@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   Button,
   Dialog,
@@ -32,9 +33,9 @@ const useStyles = makeStyles({
 });
 
 
-const DialogAdmin = ({ open, onClose, onSubmit }) => {
+const DialogAdmin = ({ open, onClose, onSubmitSuccess }) => {
   const [nom, setNom] = useState('');
-  const [nompharmacie, setNomPharmacie] = useState('');
+  const [nomDePharmacie, setNomPharmacie] = useState('');
   const[telephone,settelephone]=useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -64,16 +65,21 @@ const DialogAdmin = ({ open, onClose, onSubmit }) => {
   
   
 
-  const handleSubmit = () => {
+  const handleSubmit =async () => {
     const formData = {
       nom,
-      nompharmacie,
+      nomDePharmacie,
       telephone,
       email,
     password,
     };
-    onSubmit(formData);
-    handleClose();
+    try {
+      await axios.post('http://192.168.100.175:3010/pharmacists', formData);
+      onSubmitSuccess(); 
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleClose = () => {
@@ -106,7 +112,7 @@ const DialogAdmin = ({ open, onClose, onSubmit }) => {
           label="Nom de la pharmacie "
           type="text"
           fullWidth
-          value={nompharmacie}
+          value={nomDePharmacie}
           onChange={handlenompharmaice}
         />
          
