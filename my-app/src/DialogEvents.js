@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   Button,
   Dialog,
@@ -32,11 +33,13 @@ const useStyles = makeStyles({
 });
 
 
-const DialogAdmin = ({ open, onClose, onSubmit }) => {
+const DialogAdmin = ({ open, onClose, onSubmitSuccess }) => {
   const [organisateur, setorganisateur] = useState('');
   const [titre, settitre] = useState('');
   const[lieux,setlieux]=useState('');
   const [description, setdescription] = useState('');
+  const [telephone, settelephone] = useState('');
+  const [date, setdate] = useState('');
 
  
 
@@ -54,6 +57,13 @@ const DialogAdmin = ({ open, onClose, onSubmit }) => {
   const handleDescriptionChange = (event) => {
     setdescription(event.target.value);
   };
+  const handleTelepehoneChange = (event) => {
+    settelephone(event.target.value);
+  };
+  const handleDateChange = (event) => {
+    setdate(event.target.value);
+  };
+ 
  
 
 
@@ -62,14 +72,22 @@ const DialogAdmin = ({ open, onClose, onSubmit }) => {
   
   
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
     const formData = {
       organisateur,
       titre,
       lieux,
       description,
+      telephone,
+      date
     };
-    onSubmit(formData);
+    try {
+      await axios.post('http://192.168.100.175:3010/api/events', formData);
+      onSubmitSuccess(); 
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
     handleClose();
   };
 
@@ -79,6 +97,8 @@ const DialogAdmin = ({ open, onClose, onSubmit }) => {
     settitre('');
     setlieux('');
     setdescription('');
+    setdate('');
+    settelephone('');
     
   };
 
@@ -125,6 +145,26 @@ const DialogAdmin = ({ open, onClose, onSubmit }) => {
           fullWidth
           value={description}
           onChange={handleDescriptionChange}
+          required
+        />
+        <TextField
+          autoFocus
+          margin="dense"
+          label="date"
+          type="text"
+          fullWidth
+          value={date}
+          onChange={handleDateChange}
+          required
+        />
+        <TextField
+          autoFocus
+          margin="dense"
+          label="telephone"
+          type="text"
+          fullWidth
+          value={telephone}
+          onChange={handleTelepehoneChange  }
           required
         />
       

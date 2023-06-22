@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import Dashboard from './Dashbord';
 import Sidebar from './Sidebar';
+import Login from './Login';
 
 const App = () => {
   const [route, setRoute] = useState('login');
-  const handleRouteChange = (newRoute) => {
+  const [userType, setUserType] = useState('');
+
+  const handleRouteChange = (newRoute, newUserType) => {
     setRoute(newRoute);
+    setUserType(newUserType);
   };
 
-
   return (
-  
     <div>
-    {route === 'login' && <Login onRouteChange={handleRouteChange} />}
-    {route === 'sidebar' && <Sidebar onRouteChange={handleRouteChange} />}
-  </div>
-  
+      {route === 'login' ? (
+        <Login onRouteChange={handleRouteChange} />
+      ) : (
+        <Sidebar onRouteChange={handleRouteChange} userType={userType} />
+      )}
+    </div>
   );
 };
 

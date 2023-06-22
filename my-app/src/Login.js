@@ -10,6 +10,7 @@ const Login = ({ onRouteChange }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [userType, setUserType] = useState('admin');
 
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
@@ -24,34 +25,43 @@ const Login = ({ onRouteChange }) => {
     }
 
     try {
-      const response = await axios.post('http://192.168.100.175:3010/api/admin/login', { email, password });
-      console.log("my email is " + email);
+      if (email.includes('pharmacist')) {
+        // Additional login logic for pharmacists
+        const pharmacistResponse = await axios.post('http://192.168.100.175:3010/api/pharmacist/login', {
+          email,
+          password,
+        });
+        const pharmacistData = pharmacistResponse.data;
 
-      const data = response.data; 
+        if (pharmacistResponse.status === 200) {
+          const pharmacistToken = pharmacistData.token;
+          console.log('Pharmacist Token:', pharmacistToken);
+          setUserType('pharmacist');
+          // Switch to the pharmacist dashboard route
+          onRouteChange('sidebar', 'pharmacist');
+          return;
+        } else {
+          setErrorMessage('Incorrect credentials for pharmacist');
+          return;
+        }
+      }
+
+      // Standard login logic for other users
+      const response = await axios.post('http://192.168.100.175:3010/api/admin/login', { email, password });
+      const data = response.data;
 
       if (response.status === 200) {
-        console.log("chouchane");
-
         const token = data.token;
-
-        handleLogin1();
-        // Handle the token, e.g., store it in local storage or state
         console.log('Token:', token);
+
+        // Switch to the dashboard route
+        onRouteChange('sidebar', 'admin');
       } else {
-        console.log("aziza");
-        setErrorMessage('Identifiants incorrects') // Display error message to the user
+        setErrorMessage('Incorrect credentials');
       }
     } catch (error) {
-      // Network or server error
-      console.log("goujou");
+      console.log('Error:', error);
     }
-  };
-
-  const handleLogin1 = () => {
-    // Perform login logic and validate credentials
-
-    // Switch to the dashboard route
-    onRouteChange('sidebar');
   };
 
   return (
@@ -89,8 +99,7 @@ const Login = ({ onRouteChange }) => {
             placeholder="Email"
             required
           />
-          <div style={{ position: 'relative', width: '100%' }}>
-            <input
+          <div style={{ position: 'relative', width: '100%' }}> <input
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -130,8 +139,6 @@ const Login = ({ onRouteChange }) => {
       </div>
     </div>
   );
-  
-  
 };
 
 export default Login;
