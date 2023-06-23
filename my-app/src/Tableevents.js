@@ -17,7 +17,7 @@ export const TableEvents = (refrechtable) => {
       const confirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cette pharmacie ?");
   
       if (confirmed) {
-        await axios.delete(`http://192.168.100.175:3010/api/pharmacy/${pharmacyId}`);
+        await axios.delete(`http://192.168.1.191:3010/api/pharmacy/${pharmacyId}`);
         // Mettez à jour la liste des pharmacies après la suppression
         fetchEvents();
       }
@@ -27,7 +27,7 @@ export const TableEvents = (refrechtable) => {
   };
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://192.168.100.175:3010/api/events');
+      const response = await axios.get('http://192.168.1.191:3010/api/events');
       setEvents(response.data);
     } catch (error) {
       console.log(error);
@@ -45,6 +45,7 @@ export const TableEvents = (refrechtable) => {
           <th>description</th>
           <th>date</th>
           <th>telephone</th>
+          <th>actions</th>
 
         </tr>
       </thead>

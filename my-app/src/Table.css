@@ -94,3 +94,8 @@
     color: #337ab7;
     font-size: 18px;
   }
+  .circle-green {
+    color: green;
+    cursor: pointer;
+  }
+  

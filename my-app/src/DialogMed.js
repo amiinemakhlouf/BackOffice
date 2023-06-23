@@ -56,7 +56,7 @@ const DialogMed = ({ open, onClose, onSubmitSuccess }) => {
   const handleCodeAbarChange = (event) => {
     setCodAbar(event.target.value);
   };
-  const handleEmailhange = (event) => {
+  const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
@@ -75,7 +75,7 @@ const DialogMed = ({ open, onClose, onSubmitSuccess }) => {
     email
     };
     try {
-      await axios.post('http://192.168.100.175:3010/pharmacy/medication', formData);
+      await axios.post('http://192.168.1.191:3010/pharmacy/medication', formData);
       onSubmitSuccess(); 
       handleClose();
     } catch (error) {
@@ -137,7 +137,7 @@ const DialogMed = ({ open, onClose, onSubmitSuccess }) => {
           value={codabar}
           onChange={handleCodeAbarChange}
           required
-        />
+        /> 
        
 
 

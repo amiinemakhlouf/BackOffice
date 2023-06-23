@@ -29,7 +29,7 @@ export const Table = (  refrechtable ) => {
   };
   const fetchPharmacies = async () => {
     try {
-      const response = await axios.get('http://192.168.100.175:3010/api/pharmacy');
+      const response = await axios.get('http://192.168.1.191:3010/api/pharmacy');
       setPharmacies(response.data);
     } catch (error) {
       console.log(error);

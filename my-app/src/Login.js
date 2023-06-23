@@ -27,7 +27,7 @@ const Login = ({ onRouteChange }) => {
     try {
       if (email.includes('pharmacist')) {
         // Additional login logic for pharmacists
-        const pharmacistResponse = await axios.post('http://192.168.100.175:3010/api/pharmacist/login', {
+        const pharmacistResponse = await axios.post('http://192.168.1.191:3010/api/pharmacist/login', {
           email,
           password,
         });
@@ -47,7 +47,7 @@ const Login = ({ onRouteChange }) => {
       }
 
       // Standard login logic for other users
-      const response = await axios.post('http://192.168.100.175:3010/api/admin/login', { email, password });
+      const response = await axios.post('http://192.168.1.191:3010/api/admin/login', { email, password });
       const data = response.data;
 
       if (response.status === 200) {

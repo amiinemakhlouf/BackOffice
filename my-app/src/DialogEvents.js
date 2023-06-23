@@ -82,7 +82,7 @@ const DialogAdmin = ({ open, onClose, onSubmitSuccess }) => {
       date
     };
     try {
-      await axios.post('http://192.168.100.175:3010/api/events', formData);
+      await axios.post('http://192.168.1.191:3010/api/events', formData);
       onSubmitSuccess(); 
       handleClose();
     } catch (error) {

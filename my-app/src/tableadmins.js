@@ -27,7 +27,7 @@ export const TableAdmins = (refrechtable) => {
   };
   const fetchAdmins = async () => {
     try {
-      const response = await axios.get('http://192.168.100.175:3010/pharmacists');
+      const response = await axios.get('http://192.168.1.191:3010/pharmacists');
       setAdmins(response.data);
     } catch (error) {
       console.log(error);

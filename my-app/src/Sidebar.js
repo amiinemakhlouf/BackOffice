@@ -63,7 +63,7 @@ const Sidebar = ({ onRouteChange, userType }) => {
               onClick={() => handleNavigation('events')}
               style={{ backgroundColor: activeComponent === 'events' ? 'darkgreen' : '' }}
             >
-              <i className="bi bi-speedometer2"></i> Evennements
+              <i className="bi bi-speedometer2"></i> Evenements
             </button>
           </li>
           <li className="nav-item">
@@ -72,7 +72,7 @@ const Sidebar = ({ onRouteChange, userType }) => {
               onClick={() => handleNavigation('admins')}
               style={{ backgroundColor: activeComponent === 'admins'? 'darkgreen' : '' }}
               >
-                <i className="bi bi-grid"></i> Admins
+                <i className="bi bi-grid"></i> Pharmaciens
               </button>
             </li>
           </>
