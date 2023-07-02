@@ -19,7 +19,7 @@ export const Table = (  refrechtable ) => {
       const confirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cette pharmacie ?");
   
       if (confirmed) {
-        await axios.delete(`http://192.168.100.175:3010/api/pharmacy/${pharmacyId}`);
+        await axios.delete(`http://192.168.118.34:3010/api/pharmacy/${pharmacyId}`);
         // Mettez à jour la liste des pharmacies après la suppression
         fetchPharmacies();
       }
@@ -29,7 +29,7 @@ export const Table = (  refrechtable ) => {
   };
   const fetchPharmacies = async () => {
     try {
-      const response = await axios.get('http://192.168.1.191:3010/api/pharmacy');
+      const response = await axios.get('http://192.168.118.34:3010/api/pharmacy');
       setPharmacies(response.data);
     } catch (error) {
       console.log(error);
@@ -42,6 +42,7 @@ export const Table = (  refrechtable ) => {
         <thead>
           <tr>
             <th>Nom de la pharmacie</th>
+            <th>email</th>
             <th>Rue</th>
             <th>Heure d'ouverture</th>
             <th>Heure de fermeture</th>
@@ -53,6 +54,7 @@ export const Table = (  refrechtable ) => {
           {pharmacies.map((pharmacy, idx) => (
             <tr key={idx}>
               <td>{pharmacy.name}</td>
+              <td>{pharmacy.email}</td>
               <td>{pharmacy.streetName}</td>
               <td>{pharmacy.workingHourStart}</td>
               <td>{pharmacy.workingHourEnd}</td>

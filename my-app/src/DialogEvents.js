@@ -82,7 +82,7 @@ const DialogAdmin = ({ open, onClose, onSubmitSuccess }) => {
       date
     };
     try {
-      await axios.post('http://192.168.1.191:3010/api/events', formData);
+      await axios.post('http://192.168.118.34:3010/api/events', formData);
       onSubmitSuccess(); 
       handleClose();
     } catch (error) {
@@ -115,6 +115,7 @@ const DialogAdmin = ({ open, onClose, onSubmitSuccess }) => {
           fullWidth
           value={organisateur}
           onChange={handleOrganisateurchange}
+          required
         />
         <TextField
           autoFocus
@@ -124,6 +125,7 @@ const DialogAdmin = ({ open, onClose, onSubmitSuccess }) => {
           fullWidth
           value={titre}
           onChange={handleTitrechange}
+          required
         />
          
          <TextField

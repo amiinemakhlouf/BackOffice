@@ -28,7 +28,7 @@ const Med = () => {
       <div style={{ marginTop: "60px" }}>
         <button className="add-pharmacy-btn" onClick={handleOpenDialog}>Ajouter une medicaments</button>
       </div>
-      <div style={{ marginTop: "80px", width: "1250px" }}>
+      <div style={{ marginTop: "100px", width: "70%",marginLeft:"40px" }}>
         <TableMed/>
       </div>
       <DialogMed open={dialogOpen} onClose={handleCloseDialog} onSubmit={handleFormSubmit} />

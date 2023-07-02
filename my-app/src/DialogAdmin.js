@@ -74,7 +74,7 @@ const DialogAdmin = ({ open, onClose, onSubmitSuccess }) => {
     password,
     };
     try {
-      await axios.post('http://192.168.1.191:3010/pharmacists', formData);
+      await axios.post('http://192.168.118.34:3010/pharmacists', formData);
       onSubmitSuccess(); 
       handleClose();
     } catch (error) {

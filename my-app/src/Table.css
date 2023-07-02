@@ -98,4 +98,10 @@
     color: green;
     cursor: pointer;
   }
-  
+  .description-cell {
+  max-width: 200px; /* Ajustez cette valeur selon vos besoins */
+  word-wrap: break-word;
+}
+.circle-red {
+  color: red;
+}

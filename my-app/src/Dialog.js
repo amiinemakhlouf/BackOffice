@@ -42,6 +42,7 @@ const DialogForm = ({ open, onClose,onSubmitSuccess  }) => {
   const [longitude, setLongitude] = useState('');
   const [latitude, setLatitude] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -70,6 +71,9 @@ const DialogForm = ({ open, onClose,onSubmitSuccess  }) => {
   const handlephoneNumberChange = (event) => {
     setPhoneNumber(event.target.value);
   };
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
 
   const handleSubmit = async () => {
     const formData = {
@@ -80,10 +84,10 @@ const DialogForm = ({ open, onClose,onSubmitSuccess  }) => {
       longitude,
       latitude,
       phoneNumber,
-    };
+      email    };
 
     try {
-      await axios.post('http://192.168.1.191:3010/api/pharmacy/save', formData);
+      await axios.post('http://192.168.118.34:3010/api/pharmacy/save', formData);
       onSubmitSuccess(); 
       handleClose();
     } catch (error) {
@@ -95,6 +99,7 @@ const DialogForm = ({ open, onClose,onSubmitSuccess  }) => {
     onClose();
     setName('');
     setLongitude('');
+    setEmail('');
     setLatitude('');
     setStreetName('');
     setWorkingHourStart('');
@@ -115,6 +120,17 @@ const DialogForm = ({ open, onClose,onSubmitSuccess  }) => {
           value={name}
           onChange={handleNameChange}
           required
+        />
+         <TextField
+          autoFocus
+          margin="dense"
+          label="email"
+          type="text"
+          fullWidth
+          value={email}
+          onChange={handleEmailChange}
+          required
+          
         />
 
         <TextField

@@ -7,6 +7,8 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  FormControl,
+  FormLabel,
   Select,
   MenuItem,
   Radio,
@@ -75,7 +77,7 @@ const DialogMed = ({ open, onClose, onSubmitSuccess }) => {
     email
     };
     try {
-      await axios.post('http://192.168.1.191:3010/pharmacy/medication', formData);
+      await axios.post('http://192.168.118.34:3010/pharmacy/medication', formData);
       onSubmitSuccess(); 
       handleClose();
     } catch (error) {
@@ -108,16 +110,19 @@ const DialogMed = ({ open, onClose, onSubmitSuccess }) => {
           onChange={handleNameChange}
         />
         
-        <TextField
-          autoFocus
-          margin="dense"
-          label="En Stock"
-          type="boolean"
-          fullWidth
-          value={inStock}
-          onChange={handleInStockChange}
-          required
-        />
+        <FormControl component="fieldset">
+          <FormLabel component="legend">En Stock</FormLabel>
+          <RadioGroup
+            aria-label="En Stock"
+            name="inStock"
+            value={inStock.toString()}
+            onChange={handleInStockChange}
+          >
+            <FormControlLabel value="true" control={<Radio />} label="Oui" />
+            <FormControlLabel value="false" control={<Radio />} label="Non" />
+          </RadioGroup>
+        </FormControl>
+
       <TextField
           autoFocus
           margin="dense"

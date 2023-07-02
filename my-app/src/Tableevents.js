@@ -17,7 +17,7 @@ export const TableEvents = (refrechtable) => {
       const confirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cette pharmacie ?");
   
       if (confirmed) {
-        await axios.delete(`http://192.168.1.191:3010/api/pharmacy/${pharmacyId}`);
+        await axios.delete(`http://192.168.118.34:3010/api/pharmacy/${pharmacyId}`);
         // Mettez à jour la liste des pharmacies après la suppression
         fetchEvents();
       }
@@ -27,7 +27,7 @@ export const TableEvents = (refrechtable) => {
   };
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://192.168.1.191:3010/api/events');
+      const response = await axios.get('http://192.168.118.34:3010/api/events');
       setEvents(response.data);
     } catch (error) {
       console.log(error);
@@ -36,41 +36,45 @@ export const TableEvents = (refrechtable) => {
 
   return (
     <div className="table-wrapper">
-    <table className="table">
-      <thead>
-        <tr>
-          <th>organisateur </th>
-          <th>titre</th>
-          <th>lieu</th>
-          <th>description</th>
-          <th>date</th>
-          <th>telephone</th>
-          <th>actions</th>
-
+  <table className="table">
+    <thead>
+      <tr>
+        <th>organisateur</th>
+        <th>titre</th>
+        <th>lieu</th>
+        <th>description</th>
+        <th>date</th>
+        <th>telephone</th>
+        <th>actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {events.map((event, idx) => (
+        <tr key={idx}>
+          <td>{event.organisateur}</td>
+          <td>{event.titre}</td>
+          <td>{event.lieux}</td>
+          <td>
+            <div className="description-cell">{event.description}</div>
+          </td>
+          <td>{event.date}</td>
+          <td>{event.telephone}</td>
+          <td>
+            <button
+              className="delete-button"
+              onClick={() => deletePharmacy(event.id)}
+            >
+              <DeleteIcon className="delete-icon" />
+            </button>
+            <button className="edit-button">
+              <EditIcon className="edit-icon" />
+            </button>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        {events.map((events, idx) => (
-          <tr key={idx}>
-            <td>{events.organisateur}</td>
-            <td>{events.titre}</td>
-            <td>{events.lieu}</td>
-            <td>{events.description}</td>
-            <td>{events.date}</td>
-            <td>{events.telephone}</td>
-            <td>
-              <button className="delete-button"
-              onClick={() => deletePharmacy(events.id)}>
-                <DeleteIcon className="delete-icon" />
-              </button>
-              <button className="edit-button">
-        <EditIcon className="edit-icon" />
-      </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+      ))}
+    </tbody>
+  </table>
+</div>
+
   );
 };
